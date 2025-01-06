@@ -53,8 +53,8 @@ public:
     }
 
     void BFS(int x);
-    void DFSIterative(int x);
-    void DFSRecursive(int x, int s, vector<bool> &visited, bool &found);
+    void DFS(int x);
+    void DFSR(int x, int s, vector<bool> &visited, bool &found);
     void LimitedDFS(int x, int depthLimit);
 };
 
@@ -99,7 +99,7 @@ void Graph::BFS(int x)
     cout << "Element not found using BFS!" << endl;
 }
 
-void Graph::DFSIterative(int x)
+void Graph::DFS(int x)
 {
     int s;
     cout << "Enter source Vertex: ";
@@ -138,7 +138,7 @@ void Graph::DFSIterative(int x)
     cout << "Element not found using Iterative DFS!" << endl;
 }
 
-void Graph::DFSRecursive(int x, int s, vector<bool> &visited, bool &found)
+void Graph::DFSR(int x, int s, vector<bool> &visited, bool &found)
 {
     visited[s - 1] = true;
     cout << s << " ";
@@ -154,7 +154,7 @@ void Graph::DFSRecursive(int x, int s, vector<bool> &visited, bool &found)
     {
         if (graph[s - 1][i] == 1 && !visited[i])
         {
-            DFSRecursive(x, i + 1, visited, found);
+            DFSR(x, i + 1, visited, found);
             if (found)
                 return;
         }
@@ -244,7 +244,7 @@ int main()
             int x;
             cout << "Enter element to search using Iterative DFS: ";
             cin >> x;
-            G.DFSIterative(x);
+            G.DFS(x);
             break;
         }
         case 5:
@@ -256,7 +256,7 @@ int main()
             cin >> s;
             vector<bool> visited(G.getVertices(), false);
             bool found = false;
-            G.DFSRecursive(x, s, visited, found);
+            G.DFSR(x, s, visited, found);
             if (!found)
                 cout << "Element not found using Recursive DFS!" << endl;
             break;
